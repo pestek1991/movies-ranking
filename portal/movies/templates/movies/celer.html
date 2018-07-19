@@ -1,0 +1,46 @@
+
+
+{% extends "movies/base.html" %}
+{% block title %}Film miesiąca{% endblock %}
+
+{% block content %}
+
+
+
+
+  {% if movie %}
+
+
+
+<div class="jumbotron">
+  <h2 class="text-center">Film miesiąca</h2>
+  <h4 class="text-center">{{ movie.title }}</h4>
+
+  <br>
+  <hr>
+  <br>
+
+  <div class="row text-center">
+
+
+
+           <iframe class="text-center" height="400px" width="100%" src="{{ movie.trailer_url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+
+
+</div>
+
+
+  {% else %}
+
+
+    <div class="alert alert-danger">
+  <strong>Uwaga!</strong> Ups coś poszło nie tak ? spytajcie Mateusza pewnie coś naboił, albo nie ma filmów w bazie
+</div>
+
+  {% endif %}
+
+
+
+{% endblock %}

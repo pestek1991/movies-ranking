@@ -1,0 +1,60 @@
+
+{% extends "movies/base.html" %}
+{% block title %}Edycja filmu{% endblock %}
+
+{% block content %}
+
+
+<div class="jumbotron">
+
+<h4 class="text-center">Edycja filmu {{movie.titile}}</h4>
+
+    <br>
+    <hr>
+    <br>
+
+
+    {% if alert and alert is True %}
+
+       <div class="alert alert-success">
+  Poprawnie edytowano dane filmu
+</div>
+
+{% endif %}
+
+
+
+    {% if form.errors %}
+         <div class="alert alert-danger">
+  Popraw błędy w formularzu
+</div>
+    {% endif %}
+
+
+
+  <form action="" method="post" enctype="multipart/form-data" novalidate>
+      <table>
+          {{ form.as_table }}
+      </table>
+      {% csrf_token %}
+      <input class="btn btn-success" type="submit" value="Edytuj film">
+  </form>
+
+    <br>
+
+   <form action="/movies/remove/" method="post">
+		           {% csrf_token %}
+				<input type="hidden" name="item_id" value="{{movie.id}}" />
+			       <input class="btn btn-danger" type="submit" value="usuń film">
+			</form>
+
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}

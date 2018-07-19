@@ -1,0 +1,118 @@
+
+{% extends "movies/base.html" %}
+
+{% block title %}Lista filmów{% endblock %}
+
+{% block content %}
+
+
+
+
+   {% if alert_remove and alert_remove is True %}
+
+       <div class="alert alert-success">
+  Poprawnie usnięto film
+</div>
+
+{% endif %}
+
+
+
+<div class="text-center"> <a class="text-center btn btn-success" href="/movies/add">Dodaj nowy film</a></div>
+<br>
+<div class="text-center"> <a class="text-center btn btn-success" href="/movies/celer">Film miesiąca</a></div>
+
+
+
+<hr>
+
+  {% if movies %}
+
+
+
+
+
+<h5 class="text-center">Znaleziono <span class="badge badge-secondary">{{ movies_len }}</span> filmów</h5>
+
+<hr>
+     {% for movie in movies %}
+
+  <div class="row">
+
+
+          <div class="col-sm-1">
+
+            <img class="img-fluid rounded" src = {{ movie.image.url }} >
+
+          </div>
+          <div class="col-sm-6">
+
+            <ul>
+
+              <li>Tytuł:  <span class="badge badge-primary">{{ movie.title }}</span></li>
+              <li>Reżyesria:  <span class="badge badge-primary">{{ movie.director }}</span></li>
+              <li>Scenariusz:  <span class="badge badge-primary">{{ movie.writters }}</span></li>
+              <li>Kraj:  <span class="badge badge-primary">{{ movie.country }}</span></li>
+
+            </ul>
+
+
+          </div>
+          <div class="col-sm-5 text-right">
+
+            <a class="btn btn-primary" href="{% url 'movie-edit' movie.id %}">edycja</a>
+          <a class="btn btn-info" href="{% url 'movie-details' movie.id %}">podgląd</a>
+  <!--<a class="btn btn-danger" href="/movies/remove/{{ movie.id }}">usuń</a>-->
+
+
+                  <form action="/movies/remove/" method="post">
+                       {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{movie.id}}" />
+                       <input class="btn btn-danger" type="submit" value="usuń">
+                </form>
+          </div>
+      </div>
+
+<br>
+
+
+
+      {% endfor %}
+
+
+
+{% if movies.has_other_pages %}
+
+<hr>
+  <ul class="pagination justify-content-center">
+    {% if movies.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ movies.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in movies.paginator.page_range %}
+      {% if movies.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a  class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if movies.has_next %}
+      <li class="page-item"><a  class="page-link" href="?page={{ movies.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+
+{% endif %}
+
+
+  {% else %}
+
+    <div class="alert alert-danger">
+  <strong>Uwaga!</strong> Nie znaleziono żadnych filmów.
+</div>
+
+  {% endif %}
+
+{% endblock %}

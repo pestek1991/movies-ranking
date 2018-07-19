@@ -1,0 +1,70 @@
+
+{% extends "movies/base.html" %}
+{% block title %}Szczegóły filmu{% endblock %}
+
+{% block content %}
+
+
+
+  {% if movie %}
+
+
+
+<div class="jumbotron">
+  <h4 class="text-center">{{ movie.title }}</h4>
+
+  <br>
+  <hr>
+  <br>
+
+  <div class="row">
+
+    <div class="col-3 ">
+
+
+            <ul>
+
+              <li>Tytuł: <span class="badge badge-primary">{{ movie.title }}</span></li>
+              <li>Reżyesria:  <span class="badge badge-primary">{{ movie.director }}</span></li>
+              <li>Scenariusz:  <span class="badge badge-primary">{{ movie.writters }}</span></li>
+              <li>Długość:  <span class="badge badge-primary">{{ movie.length }}</span></li>
+              <li>Premiera:  <span class="badge badge-primary">{{ movie.add_date }}</span></li>
+              <li>Kraj:  <span class="badge badge-primary">{{ movie.country }}</span></li>
+
+            </ul>
+
+
+    </div>
+
+    <div class="col-9 text-center">
+
+      <kbd>Trailer</kbd>
+      <br>
+      <br>
+
+      <iframe height="100%" src="{{ movie.trailer_url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+    </div>
+
+
+
+  </div>
+
+
+</div>
+
+
+
+
+
+  {% else %}
+
+
+    <div class="alert alert-danger">
+  <strong>Uwaga!</strong> Pod tym adresem nie kryje się żaden film :)
+</div>
+
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,59 @@
+
+{% extends "movies/base.html" %}
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+
+
+<div class="jumbotron text-center">
+
+
+
+      {% if user.is_authenticated %}
+
+
+
+          <div class="alert alert-primary">
+ Już jesteś zalogowany :) Wylogowywanie jest w lewym górnym rogu :D
+</div>
+
+
+      {% else %}
+
+{% if alert and alert is True %}
+       <div class="alert alert-primary">
+  Aby przeglądać żądaną treść musisz się najpierw zalogować
+</div>
+
+{% endif %}
+
+
+    {% if alert_error %}
+       <div class="alert alert-danger">
+  {{ alert_error }}
+</div>
+
+{% endif %}
+
+
+
+
+
+
+   <form action="" method="post"  novalidate>
+      <table class="table-hover" style="margin: auto;">
+          {{ form.as_table }}
+      </table>
+      {% csrf_token %}
+       <br>
+      <input class="btn btn-outline-primary" type="submit" value="logowanie">
+  </form>
+
+      {% endif %}
+
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+  </head>
+  <body>
+
+
+
+  <div class="row">
+
+    <div class="col">
+
+
+      {% if user.is_authenticated %}
+      <p class="text-right">Witaj, <span class="badge badge-secondary">{{ user.username }}</span><br>
+        <a href="/logout" class="btn btn-outline-danger">wyloguj się</a></p>
+      {% else %}
+        <p class="text-right"><a href="/login" class="btn btn-outline-success">Zaloguj się</a></p>
+      {% endif %}
+
+
+    </div>
+
+  </div>
+
+
+   {% block content %}{% endblock %}
+
+
+  <hr>
+
+<footer class="text-center">
+
+      <a href="/movies"><kbd>Powrót do listy filmów</kbd></a>
+
+
+</footer>
+
+
+  <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+   {{ form.media }}
+
+  </body>
+</html>

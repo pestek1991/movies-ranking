@@ -1,0 +1,62 @@
+
+
+{% extends "movies/base.html" %}
+{% block title %}Dodaj nowy film{% endblock %}
+
+{% block content %}
+
+
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+
+<div class="jumbotron">
+
+    <h4 class="text-center">Dodaj nowy film</h4>
+
+    <br>
+    <hr>
+    <br>
+
+        {% if alert and alert is True %}
+
+       <div class="alert alert-success">
+  Poprawnie dodano nowy film, możesz teraz dodać następny
+</div>
+
+{% endif %}
+
+
+      {% if form.errors %}
+         <div class="alert alert-danger">
+  Popraw błędy w formularzu
+</div>
+    {% endif %}
+
+
+
+
+
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+      <table style="margin:0;">
+          {{ form.as_table  }}
+      </table>
+      {% csrf_token %}
+                <br>
+      <input class="btn btn-outline-primary" type="submit" value="Dodaj nowy film">
+  </form>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+
